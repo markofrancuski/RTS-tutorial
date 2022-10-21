@@ -28,6 +28,7 @@ public class GridSystem
     }
 
     #endregion Contructors
+
     public void CreateDebugObjects(Transform debugPrefab)
     {
         for (int x = 0; x < _width; x++)
@@ -67,5 +68,14 @@ public class GridSystem
             gridPosition.z >= 0 &&
             gridPosition.x < _width &&
             gridPosition.z < _height;
+    }
+
+    public int GetWidth()
+    {
+        return _width;
+    }
+    public int GetHeight()
+    {
+        return _height;
     }
 }
