@@ -7,6 +7,7 @@ public class UnitActionSystem : MonoBehaviour
     public static UnitActionSystem Instance { get; private set; }
 
     public event EventHandler OnSelectedUnitChanged;
+    public event EventHandler OnSelectedUnitActionChanged;
 
     public Unit GetSelectedUnit => _selectedUnit;
     public BaseAction GetSelectedAction => _selectedAction;
@@ -60,6 +61,7 @@ public class UnitActionSystem : MonoBehaviour
     public void SetSelectedAction(BaseAction baseAction)
     {
         _selectedAction = baseAction;
+        OnSelectedUnitActionChanged?.Invoke(this, EventArgs.Empty);
     }
 
     #endregion Public Methods

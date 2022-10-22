@@ -275,7 +275,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.26693356, y: -0.000000028720944, z: 0.00000000795524, w: 0.96371496}
+  m_LocalRotation: {x: 0.26693356, y: 0.000000028720944, z: -0.00000000795524, w: 0.96371496}
   m_LocalPosition: {x: -0.21, y: 6, z: -4.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -606,7 +606,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.7364185, y: 1}
+    m_SensorSize: {x: 1.7788461, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -622,7 +622,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465284341}
-  m_LocalRotation: {x: 0.26693356, y: -0.000000028720944, z: 0.00000000795524, w: 0.96371496}
+  m_LocalRotation: {x: 0.26693356, y: 0.000000028720944, z: -0.00000000795524, w: 0.96371496}
   m_LocalPosition: {x: -0.21, y: 6, z: -4.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1078,6 +1078,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7572553899621528970, guid: 840ac3af9c28caf4aa704521694855cd,
+        type: 3}
+      propertyPath: _rotateSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7660043059967396848, guid: 840ac3af9c28caf4aa704521694855cd,
         type: 3}
       propertyPath: m_Enabled
@@ -1115,7 +1120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -1495,6 +1499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd694b862fdafdc48b1bfc46a0ed2da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selectedAction: {fileID: 0}
   _selectedUnit: {fileID: 255663680}
   _unitLayerMask:
     serializedVersion: 2
@@ -1616,20 +1621,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6186958446184590383, guid: 840ac3af9c28caf4aa704521694855cd,
+    - target: {fileID: 7572553899621528970, guid: 840ac3af9c28caf4aa704521694855cd,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: _moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572553899621528970, guid: 840ac3af9c28caf4aa704521694855cd,
+        type: 3}
+      propertyPath: _rotateSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7572553899621528970, guid: 840ac3af9c28caf4aa704521694855cd,
         type: 3}
       propertyPath: _maxMoveDistance
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7660043059967396848, guid: 840ac3af9c28caf4aa704521694855cd,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 840ac3af9c28caf4aa704521694855cd, type: 3}

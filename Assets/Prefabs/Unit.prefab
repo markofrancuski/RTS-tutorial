@@ -71,10 +71,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5019387271807850658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d0834a34f761994ab6f196c6d68d9d7, type: 3}
+  m_Script: {fileID: 11500000, guid: a2333aac52b8f194ebdf76f77c058dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unit: {fileID: 0}
   _animator: {fileID: 4970918440792428459}
   _rotateSpeed: 10
   _moveSpeed: 4
