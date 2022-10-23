@@ -43,6 +43,11 @@ public class SpinAction : BaseAction
         };
     }
 
+    public override int GetActionPointsCost()
+    {
+        return 2;
+    }
+
     public class SpinBaseParameters : BaseParameters
     {
         public SpinBaseParameters(Action onActionComplete) : base(onActionComplete)

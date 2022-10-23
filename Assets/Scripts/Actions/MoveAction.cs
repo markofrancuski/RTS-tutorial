@@ -94,6 +94,7 @@ public class MoveAction : BaseAction
     {
         return "Move";
     }
+
     public class MoveBaseParameters : BaseParameters
     {
         public GridPosition GridPosition;

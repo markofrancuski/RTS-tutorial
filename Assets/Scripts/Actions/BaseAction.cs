@@ -23,6 +23,11 @@ public abstract class BaseAction : MonoBehaviour
     public abstract void TakeAction(BaseParameters baseParams);
     public abstract string GetActionName();
 
+    public virtual int GetActionPointsCost()
+    {
+        return 1;
+    }
+
     public class BaseParameters
     {
         public Action OnActionComplete;

@@ -8,9 +8,12 @@ public class UnitActionSystem : MonoBehaviour
 
     public event EventHandler OnSelectedUnitChanged;
     public event EventHandler OnSelectedUnitActionChanged;
+    public event EventHandler<bool> OnBusyChanged;
+    public event EventHandler OnActionStarted;
 
     public Unit GetSelectedUnit => _selectedUnit;
     public BaseAction GetSelectedAction => _selectedAction;
+    public bool IsBusy => _isBusy;
 
     [SerializeField] private BaseAction _selectedAction;
     [SerializeField] private Unit _selectedUnit;
@@ -100,6 +103,12 @@ public class UnitActionSystem : MonoBehaviour
                 return;
             }
 
+            if (!_selectedUnit.TrySpendActionPointsToTakeAction(_selectedAction))
+            {
+                Debug.Log($"{_selectedUnit.name} cannot take action {_selectedAction.GetActionName()}", this);
+                return;
+            }
+
             BaseAction.BaseParameters baseParams = new BaseAction.BaseParameters(ClearBusy);
             switch (_selectedAction)
             {
@@ -115,6 +124,8 @@ public class UnitActionSystem : MonoBehaviour
 
             SetBusy();
             _selectedAction.TakeAction(baseParams);
+
+            OnActionStarted?.Invoke(this, EventArgs.Empty);
         }
     }
     private void SetSelectedUnit(Unit unit)
@@ -127,11 +138,13 @@ public class UnitActionSystem : MonoBehaviour
     private void SetBusy()
     {
         _isBusy = true;
+        OnBusyChanged?.Invoke(this, _isBusy);
     }
 
     private void ClearBusy()
     {
         _isBusy = false;
+        OnBusyChanged?.Invoke(this, _isBusy);
     }
 
     #endregion Private Methods
