@@ -11,6 +11,8 @@ public class Unit : MonoBehaviour
     private int _actionPoints = 2;
     [SerializeField] private int _actionPointsMax = 2;
 
+    [SerializeField] private bool _isEnemy;
+
     private BaseAction[] _baseActionArray;
 
     #region Unity Methods
@@ -44,6 +46,8 @@ public class Unit : MonoBehaviour
     #endregion Unity Methods
     public BaseAction[] GetBaseActionArray => _baseActionArray;
     public int GetActionPoints => _actionPoints;
+    public bool IsEnemy => _isEnemy;
+
     public GridPosition GetGridPosition()
     {
         return _gridPosition;
@@ -82,8 +86,15 @@ public class Unit : MonoBehaviour
     }
     private void TurnSystem_OnTurnChanged(object sender, System.EventArgs e)
     {
-        _actionPoints = _actionPointsMax;
-        OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+        if (
+            (IsEnemy && !TurnSystem.Instance.IsPlayerTurn) ||
+            (!IsEnemy && TurnSystem.Instance.IsPlayerTurn)
+            )
+        {
+            _actionPoints = _actionPointsMax;
+            OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+        }
+         
     }
 
     public override string ToString()
