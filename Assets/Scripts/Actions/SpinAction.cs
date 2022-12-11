@@ -17,15 +17,13 @@ public class SpinAction : BaseAction
         _totalSpinAmount += spinAddAmount;
         if (_totalSpinAmount >= 360)
         {
-            _isActive = false;
-            _onActionComplete();
+            ActionComplete();
         }
     }
 
     public override void TakeAction(BaseParameters baseParams)
     {
-        _onActionComplete = baseParams.OnActionComplete;
-        _isActive = true;
+        ActionStart(baseParams.OnActionComplete);
         _totalSpinAmount = 0;
     }
 

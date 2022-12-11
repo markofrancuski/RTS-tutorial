@@ -44,10 +44,20 @@ public class Unit : MonoBehaviour
     }
 
     #endregion Unity Methods
+
+
     public BaseAction[] GetBaseActionArray => _baseActionArray;
     public int GetActionPoints => _actionPoints;
     public bool IsEnemy => _isEnemy;
 
+    public void Damage()
+    {
+        Debug.Log($"{transform} Damage");
+    }
+    public Vector3 GetWorldPosition()
+    {
+        return transform.position;
+    }
     public GridPosition GetGridPosition()
     {
         return _gridPosition;
@@ -60,6 +70,7 @@ public class Unit : MonoBehaviour
     {
         return _spinAction;
     }
+
     public bool TrySpendActionPointsToTakeAction(BaseAction baseAction)
     {
         if (!CanSpendActionPointsToTakeAction(baseAction))
@@ -70,7 +81,6 @@ public class Unit : MonoBehaviour
         return true;
 
     }
-
     private bool CanSpendActionPointsToTakeAction(BaseAction baseAction)
     {
         if (_actionPoints >= baseAction.GetActionPointsCost())

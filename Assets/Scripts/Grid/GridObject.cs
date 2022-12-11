@@ -14,6 +14,15 @@ public class GridObject : MonoBehaviour
         this._units = new List<Unit>();
     }
 
+    public Unit GetUnit()
+    {
+        if (HasAnyUnit())
+        {
+            return _units[0];
+        }
+
+        return null;
+    }
     public List<Unit> GetUnits()
     {
         return this._units;

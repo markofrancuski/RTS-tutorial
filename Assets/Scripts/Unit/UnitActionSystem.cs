@@ -128,6 +128,9 @@ public class UnitActionSystem : MonoBehaviour
                 case SpinAction spinAction:
                     baseParams = new SpinAction.SpinBaseParameters(ClearBusy);
                     break;
+                case ShootAction shootAction:
+                    baseParams = new ShootAction.ShootParameters(ClearBusy, mouseGridPosition);
+                    break;
                 default:
                     break;
             }
@@ -156,6 +159,7 @@ public class UnitActionSystem : MonoBehaviour
         _isBusy = false;
         OnBusyChanged?.Invoke(this, _isBusy);
     }
+
 
     #endregion Private Methods
 
