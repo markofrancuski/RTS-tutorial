@@ -6,6 +6,14 @@ using UnityEngine.EventSystems;
 
 public class ShootAction : BaseAction
 {
+    public event EventHandler<OnShootEventArgs> OnShoot;
+    public class OnShootEventArgs : EventArgs
+    {
+        public Unit TargetUnit;
+        public Unit ShootingUnit;
+    }
+
+
     private enum State
     {
         Aiming, 
@@ -117,7 +125,6 @@ public class ShootAction : BaseAction
         _stateTimer = aimingStateTime;
     }
 
-
     private void HandleNextState()
     {
         switch (_currentState)
@@ -144,6 +151,12 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
+        OnShoot?.Invoke(this, new OnShootEventArgs
+        {
+            TargetUnit = _targetUnit,
+            ShootingUnit = _unit
+        });
+
         _targetUnit.Damage();
         _canShootBullet = false;
     }
