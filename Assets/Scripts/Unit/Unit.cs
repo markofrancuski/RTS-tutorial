@@ -52,7 +52,6 @@ public class Unit : MonoBehaviour
 
     #endregion Unity Methods
 
-
     public void Damage(int damageAmount)
     {
         _healthSystem.Damage(damageAmount);
