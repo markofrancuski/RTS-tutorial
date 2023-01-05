@@ -145,8 +145,6 @@ public class ShootAction : BaseAction
             default:
                 break;
         }
-
-        Debug.Log($"{_currentState}");
     }
 
     private void Shoot()
@@ -157,7 +155,7 @@ public class ShootAction : BaseAction
             ShootingUnit = _unit
         });
 
-        _targetUnit.Damage();
+        _targetUnit.Damage(40);
         _canShootBullet = false;
     }
 

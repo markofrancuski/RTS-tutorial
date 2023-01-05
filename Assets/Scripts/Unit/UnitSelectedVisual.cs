@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
 public class UnitSelectedVisual : MonoBehaviour
 {
     [SerializeField] private Unit _unit;

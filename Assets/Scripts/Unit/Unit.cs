@@ -5,14 +5,18 @@ public class Unit : MonoBehaviour
 {
     public static event EventHandler OnAnyActionPointsChanged;
 
+    public int GetActionPoints => _actionPoints;
+    public bool IsEnemy => _isEnemy;
+    public BaseAction[] GetBaseActionArray => _baseActionArray;
+
+    [SerializeField] private int _actionPointsMax = 2;
+    [SerializeField] private bool _isEnemy;
+    
+    private int _actionPoints = 2;
     private GridPosition _gridPosition;
+    private HealthSystem _healthSystem;
     private MoveAction _moveAction;
     private SpinAction _spinAction;
-    private int _actionPoints = 2;
-    [SerializeField] private int _actionPointsMax = 2;
-
-    [SerializeField] private bool _isEnemy;
-
     private BaseAction[] _baseActionArray;
 
     #region Unity Methods
@@ -22,6 +26,7 @@ public class Unit : MonoBehaviour
         _moveAction = GetComponent<MoveAction>();
         _spinAction = GetComponent<SpinAction>();
         _baseActionArray = GetComponents<BaseAction>();
+        _healthSystem = GetComponent<HealthSystem>();
     }
 
     private void Start()
@@ -29,7 +34,9 @@ public class Unit : MonoBehaviour
         _actionPoints = _actionPointsMax;
         _gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(_gridPosition, this);
+
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
+        _healthSystem.OnDead += HealthSystem_OnDead;
     }
 
     private void Update()
@@ -46,13 +53,9 @@ public class Unit : MonoBehaviour
     #endregion Unity Methods
 
 
-    public BaseAction[] GetBaseActionArray => _baseActionArray;
-    public int GetActionPoints => _actionPoints;
-    public bool IsEnemy => _isEnemy;
-
-    public void Damage()
+    public void Damage(int damageAmount)
     {
-        Debug.Log($"{transform} Damage");
+        _healthSystem.Damage(damageAmount);
     }
     public Vector3 GetWorldPosition()
     {
@@ -94,7 +97,7 @@ public class Unit : MonoBehaviour
         _actionPoints -= amount;
         OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
     }
-    private void TurnSystem_OnTurnChanged(object sender, System.EventArgs e)
+    private void TurnSystem_OnTurnChanged(object sender, EventArgs args)
     {
         if (
             (IsEnemy && !TurnSystem.Instance.IsPlayerTurn) ||
@@ -105,6 +108,11 @@ public class Unit : MonoBehaviour
             OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
         }
          
+    }
+    private void HealthSystem_OnDead(object sender, EventArgs args)
+    {
+        LevelGrid.Instance.RemoveUnitAtGridPosition(_gridPosition, this);
+        Destroy(gameObject);
     }
 
     public override string ToString()
