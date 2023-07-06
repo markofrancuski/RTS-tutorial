@@ -23,8 +23,8 @@ public class SpinAction : BaseAction
 
     public override void TakeAction(BaseParameters baseParams)
     {
-        ActionStart(baseParams.OnActionComplete);
         _totalSpinAmount = 0;
+        ActionStart(baseParams.OnActionComplete);
     }
 
     public override string GetActionName()

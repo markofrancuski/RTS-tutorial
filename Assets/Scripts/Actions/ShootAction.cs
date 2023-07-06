@@ -62,6 +62,12 @@ public class ShootAction : BaseAction
         }
     }
 
+
+    public Unit GetTargetUnit()
+    {
+        return _targetUnit;
+    }
+
     public override string GetActionName()
     {
         return "Shoot";
@@ -114,8 +120,6 @@ public class ShootAction : BaseAction
 
     public override void TakeAction(BaseParameters baseParams)
     {
-        ActionStart(baseParams.OnActionComplete);
-
         ShootParameters shootParams = baseParams as ShootParameters;
         _targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(shootParams.GridPosition);
         _canShootBullet = true;
@@ -123,8 +127,14 @@ public class ShootAction : BaseAction
         _currentState = State.Aiming;
         float aimingStateTime = 1f;
         _stateTimer = aimingStateTime;
+
+        ActionStart(baseParams.OnActionComplete);
     }
 
+    public int GetMaxShootDistance()
+    {
+        return _maxShootDistance;
+    }
     private void HandleNextState()
     {
         switch (_currentState)

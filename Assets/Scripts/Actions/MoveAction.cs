@@ -53,9 +53,9 @@ public class MoveAction : BaseAction
         MoveBaseParameters moveParams = baseParams as MoveBaseParameters;
 
         _targetPosition = LevelGrid.Instance.GetWorldPosition(moveParams.GridPosition);
-        ActionStart(baseParams.OnActionComplete);
-
         OnStartMoving?.Invoke(this, EventArgs.Empty);
+        
+        ActionStart(baseParams.OnActionComplete);
     }
 
     public override List<GridPosition> GetValidActionGridPositions()

@@ -4,6 +4,8 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public static event EventHandler OnAnyActionPointsChanged;
+    public static event EventHandler OnAnyUnitSpawned;
+    public static event EventHandler OnAnyUnitDead;
 
     public int GetActionPoints => _actionPoints;
     public bool IsEnemy => _isEnemy;
@@ -37,16 +39,18 @@ public class Unit : MonoBehaviour
 
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
         _healthSystem.OnDead += HealthSystem_OnDead;
+
+        OnAnyUnitSpawned?.Invoke(this, EventArgs.Empty);
     }
 
     private void Update()
     {
-
         GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         if (newGridPosition != _gridPosition) 
         {
-            LevelGrid.Instance.UnitMovedGridPosition(this, _gridPosition, newGridPosition);
+            GridPosition oldGridPos = _gridPosition;
             _gridPosition = newGridPosition;
+            LevelGrid.Instance.UnitMovedGridPosition(this, oldGridPos, newGridPosition);
         }
     }
 
@@ -112,6 +116,7 @@ public class Unit : MonoBehaviour
     {
         LevelGrid.Instance.RemoveUnitAtGridPosition(_gridPosition, this);
         Destroy(gameObject);
+        OnAnyUnitDead?.Invoke(this, EventArgs.Empty);
     }
 
     public override string ToString()
